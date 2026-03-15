@@ -1,4 +1,4 @@
-import { WhyIcon1, WhyIcon2, WhyIcon3, WhyIcon4, WhyIcon5, WhyIcon6 } from "@/public/icons"
+import { ProductIcon, DeliveryIcon, ReceptIcon, AtmosphereIcon, ChefIcon, ServiceIcon } from "@/public/icons"
 import { ReactNode } from "react"
 
 interface WhyDataType {
@@ -11,37 +11,37 @@ interface WhyDataType {
 const whyDataList: WhyDataType[] = [
   {
     id: 1,
-    icon: <WhyIcon1 />,
+    icon: <ProductIcon />,
     title: "Качественные продукты",
     description: "Используем только свежие продукты высшего качества для каждого блюда",
   },
   {
     id: 2,
-    icon: <WhyIcon2 />,
+    icon: <DeliveryIcon />,
     title: "Быстрая доставка",
     description: "Доставляем горячие блюда прямо к вашей двери в течение 30 минут",
   },
   {
     id: 3,
-    icon: <WhyIcon3 />,
+    icon: <ReceptIcon />,
     title: "Вкусные рецепты",
     description: "Уникальные рецепты, созданные лучшими шеф-поварами нашего ресторана",
   },
   {
     id: 4,
-    icon: <WhyIcon4 />,
+    icon: <AtmosphereIcon />,
     title: "Уютная атмосфера",
     description: "Создаём приятную обстановку для незабываемого отдыха с близкими",
   },
   {
     id: 5,
-    icon: <WhyIcon5 />,
+    icon: <ChefIcon />,
     title: "Опытные повара",
     description: "Наши повара имеют многолетний опыт работы в лучших ресторанах мира",
   },
   {
     id: 6,
-    icon: <WhyIcon6 />,
+    icon: <ServiceIcon />,
     title: "Отличное обслуживание",
     description: "Дружелюбный персонал всегда готов помочь и сделать визит приятным",
   },
