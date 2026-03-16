@@ -1,0 +1,111 @@
+{
+  "SiteHeader": {
+    "signIn": "Sign In"
+  },
+  "Navbar": {
+    "menu": "Menu",
+    "news": "News",
+    "reservation": "Reservation",
+    "about": "About Us",
+    "contacts": "Contacts"
+  },
+  "Hero": {
+    "title": "Delicious food is waiting for you!",
+    "button": "View menu"
+  },
+  "PopularDishes": {
+    "title": "Popular Dishes",
+    "button": "View menu",
+    "dish1": {
+      "name": "Chicken Soup",
+      "description": "Spicy with Garlic"
+    },
+    "dish2": {
+      "name": "Caesar Salad",
+      "description": "Fresh with Croutons"
+    },
+    "dish3": {
+      "name": "Beef Steak",
+      "description": "Grilled Medium Rare"
+    },
+    "dish4": {
+      "name": "Margherita",
+      "description": "Classic Italian"
+    },
+    "dish5": {
+      "name": "Salmon Fillet",
+      "description": "With Lemon Butter"
+    }
+  },
+  "TableReservation": {
+    "title": "Reserve a Table",
+    "phonePlaceholder": "Your Phone Number",
+    "peoplePlaceholder": "How many people?",
+    "person1": "1 person",
+    "person2": "2 people",
+    "person3": "3 people",
+    "locationPlaceholder": "Select location",
+    "location1": "Tashkent",
+    "location2": "Andijan",
+    "location3": "Fergana",
+    "mapLink": "Choose location on map",
+    "button": "Reserve"
+  },
+  "WhyUs": {
+    "title": "Why Choose Us?",
+    "quality": {
+      "title": "Quality Products",
+      "description": "We use only the freshest, highest quality ingredients for every dish"
+    },
+    "delivery": {
+      "title": "Fast Delivery",
+      "description": "We deliver hot meals right to your door within 30 minutes"
+    },
+    "recipes": {
+      "title": "Delicious Recipes",
+      "description": "Unique recipes crafted by the best chefs at our restaurant"
+    },
+    "atmosphere": {
+      "title": "Cozy Atmosphere",
+      "description": "We create a pleasant environment for an unforgettable time with loved ones"
+    },
+    "chefs": {
+      "title": "Experienced Chefs",
+      "description": "Our chefs have years of experience working in the world's best restaurants"
+    },
+    "service": {
+      "title": "Excellent Service",
+      "description": "Friendly staff always ready to help and make your visit enjoyable"
+    }
+  },
+  "NewsGallery": {
+    "title": "News/Gallery",
+    "button": "View all",
+    "news1": "We're opening a new branch in the center of Tashkent. Come and enjoy our signature dishes in a cozy atmosphere.",
+    "news2": "Presenting our updated menu with seasonal dishes. The chef has prepared special new items just for you.",
+    "news3": "We host a cooking master class every Saturday. Learn to cook our signature dishes together with us."
+  },
+  "Footer": {
+    "services": "Our Services",
+    "prices": "Pricing",
+    "tracking": "Tracking",
+    "report": "Report an Issue",
+    "terms": "Terms of Service",
+    "company": "Our Company",
+    "reporting": "Reporting",
+    "contact": "Contact Us",
+    "management": "Management",
+    "address": "Address",
+    "street": "Uzbekistan, Tashkent Street, 24"
+  },
+  "Menu": {
+    "title": "Menu",
+    "home": "Home",
+    "all": "All",
+    "first": "Soups",
+    "second": "Main Course",
+    "salads": "Salads",
+    "drinks": "Drinks",
+    "fastfood": "Fast Food"
+  }
+}

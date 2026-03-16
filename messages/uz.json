@@ -1,0 +1,111 @@
+{
+  "SiteHeader": {
+    "signIn": "Kirish"
+  },
+  "Navbar": {
+    "menu": "Menyu",
+    "news": "Yangiliklar",
+    "reservation": "Bron qilish",
+    "about": "Biz haqimizda",
+    "contacts": "Aloqa"
+  },
+  "Hero": {
+    "title": "Mazali taom seni kutmoqda!",
+    "button": "Menyuni ko'rish"
+  },
+  "PopularDishes": {
+    "title": "Mashhur taomlar",
+    "button": "Menyuni ko'rish",
+    "dish1": {
+      "name": "Tovuq sho'rva",
+      "description": "Achchiq va sarimsoqli"
+    },
+    "dish2": {
+      "name": "Sezar salati",
+      "description": "Krutoнlar bilan yangi"
+    },
+    "dish3": {
+      "name": "Mol go'shti bifteks",
+      "description": "O'rtacha qovurilgan"
+    },
+    "dish4": {
+      "name": "Margarita",
+      "description": "Klassik italyan"
+    },
+    "dish5": {
+      "name": "Lasos filesi",
+      "description": "Limon sariyog'i bilan"
+    }
+  },
+  "TableReservation": {
+    "title": "Stol bron qilish",
+    "phonePlaceholder": "Telefon raqamingiz",
+    "peoplePlaceholder": "Necha kishi?",
+    "person1": "1 kishi",
+    "person2": "2 kishi",
+    "person3": "3 kishi",
+    "locationPlaceholder": "Joyni tanlang",
+    "location1": "Toshkent",
+    "location2": "Andijon",
+    "location3": "Farg'ona",
+    "mapLink": "Xaritadan joy tanlash",
+    "button": "Bron qilish"
+  },
+  "WhyUs": {
+    "title": "Nima uchun biz?",
+    "quality": {
+      "title": "Sifatli mahsulotlar",
+      "description": "Har bir taom uchun faqat eng sifatli va yangi mahsulotlardan foydalanamiz"
+    },
+    "delivery": {
+      "title": "Tez yetkazib berish",
+      "description": "Issiq taomlarni 30 daqiqa ichida eshigingizga yetkazamiz"
+    },
+    "recipes": {
+      "title": "Mazali retseptlar",
+      "description": "Restoranımızning eng yaxshi oshpazlari tomonidan yaratilgan noyob retseptlar"
+    },
+    "atmosphere": {
+      "title": "Qulay muhit",
+      "description": "Yaqinlaringiz bilan unutilmas dam olish uchun qulay sharoit yaratamiz"
+    },
+    "chefs": {
+      "title": "Tajribali oshpazlar",
+      "description": "Oshpazlarimiz dunyoning eng yaxshi restoranlarida ko'p yillik tajribaga ega"
+    },
+    "service": {
+      "title": "Ajoyib xizmat",
+      "description": "Do'stona xodimlar har doim yordam berishga va tashrifingizni yoqimli qilishga tayyor"
+    }
+  },
+  "NewsGallery": {
+    "title": "Yangiliklar/Galereya",
+    "button": "Hammasini ko'rish",
+    "news1": "Toshkent markazida yangi filialimizni ochamiz. Keling va qulay muhitda bizning maxsus taomlarimizdan bahramand bo'ling.",
+    "news2": "Mavsumiy taomlar bilan yangilangan menyuni taqdim etamiz. Oshpaz siz uchun maxsus yangiliklar tayyorladi.",
+    "news3": "Har shanba kuni oshpazlik master-klassini o'tkazamiz. Biz bilan birga bizning maxsus taomlarni pishirishni o'rganing."
+  },
+  "Footer": {
+    "services": "Bizning xizmatlar",
+    "prices": "Narxlar",
+    "tracking": "Kuzatish",
+    "report": "Xato haqida xabar",
+    "terms": "Xizmat shartlari",
+    "company": "Bizning kompaniya",
+    "reporting": "Hisobot",
+    "contact": "Biz bilan bog'laning",
+    "management": "Boshqaruv",
+    "address": "Manzil",
+    "street": "O'zbekiston, Toshkent ko'chasi, 24"
+  },
+  "Menu": {
+    "title": "Menyu",
+    "home": "Bosh sahifa",
+    "all": "Hammasi",
+    "first": "Birinchi",
+    "second": "Ikkinchi",
+    "salads": "Salatlar",
+    "drinks": "Ichimliklar",
+    "fastfood": "Fast-Fud"
+  }
+}

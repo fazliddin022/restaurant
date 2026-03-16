@@ -1,47 +1,21 @@
 import { Button } from "@/components/ui/button"
 import { ArrowRightIcon } from "@/public/icons"
+import { useTranslations } from "next-intl"
 import Image from "next/image"
 
-interface NewsItemType {
-  id: number
-  img: string
-  description: string
-  userAvatar: string
-  userName: string
-}
-
-const newsList: NewsItemType[] = [
-  {
-    id: 1,
-    img: "/images/gallery-photo.png",
-    description:
-      "Открываем новый филиал в центре Ташкента. Приходите и насладитесь нашими фирменными блюдами в уютной атмосфере.",
-    userAvatar: "/images/author-avatar.png",
-    userName: "Сергей",
-  },
-  {
-    id: 2,
-    img: "/images/gallery-photo.png",
-    description:
-      "Представляем обновлённое меню с сезонными блюдами. Шеф-повар приготовил особые новинки специально для вас.",
-    userAvatar: "/images/author-avatar.png",
-    userName: "Сергей",
-  },
-  {
-    id: 3,
-    img: "/images/gallery-photo.png",
-    description:
-      "Проводим кулинарный мастер-класс каждую субботу. Научитесь готовить наши фирменные блюда вместе с нами.",
-    userAvatar: "/images/author-avatar.png",
-    userName: "Сергей",
-  },
-]
-
 const NewsGallery = () => {
+  const t = useTranslations("NewsGallery")
+
+  const newsList = [
+    { id: 1, img: "/images/gallery-photo.png", description: t("news1"), userAvatar: "/images/author-avatar.png", userName: "Sergey" },
+    { id: 2, img: "/images/gallery-photo.png", description: t("news2"), userAvatar: "/images/author-avatar.png", userName: "Sergey" },
+    { id: 3, img: "/images/gallery-photo.png", description: t("news3"), userAvatar: "/images/author-avatar.png", userName: "Sergey" },
+  ]
+
   return (
     <section className="pb-10 pt-19">
       <div className="containers flex flex-col gap-17">
-        <h2 className="text-5xl font-bold text-center">Новости/Галерея</h2>
+        <h2 className="text-5xl font-bold text-center">{t("title")}</h2>
         <ul className="flex items-center justify-center gap-25 mt-29">
           {newsList.map((item) => (
             <li
@@ -71,7 +45,7 @@ const NewsGallery = () => {
         </ul>
         <div className="w-full flex justify-end">
           <Button className="cursor-pointer py-6! px-5! rounded-br-none gap-2">
-            Посмотреть все <ArrowRightIcon />
+            {t("button")} <ArrowRightIcon />
           </Button>
         </div>
       </div>

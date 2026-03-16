@@ -1,29 +1,24 @@
 import { Button } from "@/components/ui/button"
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
 import { ArrowRightIcon } from "@/public/icons"
+import { useTranslations } from "next-intl"
 import DishCard from "@/components/customComponents/DishCard"
 
-interface PopularItem {
-  id: number
-  name: string
-  description: string
-  price: string
-  img: string
-}
-
-const popularData: PopularItem[] = [
-  { id: 1, name: "Chicken Soup",  description: "Spicy with Garlic",   price: "$10.00", img: "/images/chicken-soup.png" },
-  { id: 2, name: "Caesar Salad",  description: "Fresh with Croutons", price: "$8.00",  img: "/images/chicken-soup.png" },
-  { id: 3, name: "Beef Steak",    description: "Grilled Medium Rare", price: "$24.00", img: "/images/chicken-soup.png" },
-  { id: 4, name: "Margherita",    description: "Classic Italian",     price: "$14.00", img: "/images/chicken-soup.png" },
-  { id: 5, name: "Salmon Fillet", description: "With Lemon Butter",   price: "$18.00", img: "/images/chicken-soup.png" },
-]
-
 const PopularDishes = () => {
+  const t = useTranslations("PopularDishes")
+
+  const popularData = [
+    { id: 1, name: t("dish1.name"), description: t("dish1.description"), price: "$10.00", img: "/images/chicken-soup.png" },
+    { id: 2, name: t("dish2.name"), description: t("dish2.description"), price: "$8.00",  img: "/images/chicken-soup.png" },
+    { id: 3, name: t("dish3.name"), description: t("dish3.description"), price: "$24.00", img: "/images/chicken-soup.png" },
+    { id: 4, name: t("dish4.name"), description: t("dish4.description"), price: "$14.00", img: "/images/chicken-soup.png" },
+    { id: 5, name: t("dish5.name"), description: t("dish5.description"), price: "$18.00", img: "/images/chicken-soup.png" },
+  ]
+
   return (
     <div className="dishes-section py-10">
       <div className="containers">
-        <h2 className="font-bold text-5xl text-center">Популярные блюда</h2>
+        <h2 className="font-bold text-5xl text-center">{t("title")}</h2>
         <Carousel
           opts={{ align: "start", loop: false }}
           className="py-20 px-8"
@@ -46,7 +41,7 @@ const PopularDishes = () => {
         </Carousel>
         <div className="w-full flex justify-end">
           <Button className="cursor-pointer py-6! px-5! rounded-br-none gap-2">
-            Посмотреть меню <ArrowRightIcon />
+            {t("button")} <ArrowRightIcon />
           </Button>
         </div>
       </div>

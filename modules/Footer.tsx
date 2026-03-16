@@ -1,47 +1,44 @@
 import { SocialIcon1, SocialIcon2, SocialIcon3, SocialIcon4 } from "@/public/icons"
+import { useTranslations } from "next-intl"
 import Image from "next/image"
 
-interface FooterListType {
-  id: number
-  ulTitle: string
-  children: Array<{ childId: number; title: string }>
-}
-
-const footerList: FooterListType[] = [
-  {
-    id: 1,
-    ulTitle: "Наши услуги",
-    children: [
-      { childId: 1, title: "Цены" },
-      { childId: 2, title: "Отслеживание" },
-      { childId: 3, title: "Сообщить об ошибке" },
-      { childId: 4, title: "Условия услуг" },
-    ],
-  },
-  {
-    id: 2,
-    ulTitle: "Наша компания",
-    children: [
-      { childId: 5, title: "Отчетность" },
-      { childId: 6, title: "Свяжитесь с нами" },
-      { childId: 7, title: "Управление" },
-    ],
-  },
-  {
-    id: 3,
-    ulTitle: "Адрес",
-    children: [
-      { childId: 8, title: "Узбекистан, Ташкент Улица, 24" },
-      { childId: 9, title: "+99894848844848" },
-      { childId: 10, title: "info@bmgsoft.com" },
-    ],
-  },
-]
-
 const Footer = () => {
+  const t = useTranslations("Footer")
+
+  const footerList = [
+    {
+      id: 1,
+      ulTitle: t("services"),
+      children: [
+        { childId: 1, title: t("prices") },
+        { childId: 2, title: t("tracking") },
+        { childId: 3, title: t("report") },
+        { childId: 4, title: t("terms") },
+      ],
+    },
+    {
+      id: 2,
+      ulTitle: t("company"),
+      children: [
+        { childId: 5, title: t("reporting") },
+        { childId: 6, title: t("contact") },
+        { childId: 7, title: t("management") },
+      ],
+    },
+    {
+      id: 3,
+      ulTitle: t("address"),
+      children: [
+        { childId: 8, title: t("street") },
+        { childId: 9, title: "+99894848844848" },
+        { childId: 10, title: "info@bmgsoft.com" },
+      ],
+    },
+  ]
+
   return (
     <section className="restaurant-footer mt-10 w-full bg-center bg-no-repeat bg-cover">
-      <div className="containers py-15 flex gap-[159px]">
+      <div className="containers py-15 flex gap-39.75">
         <div className="flex flex-col items-start gap-6">
           <Image
             className="w-auto h-auto"
@@ -50,7 +47,7 @@ const Footer = () => {
             width={136}
             height={70}
           />
-          <ul className="flex gap-[10px]">
+          <ul className="flex gap-2.5">
             <li className="cursor-pointer hover:opacity-70 transition-opacity"><SocialIcon1 /></li>
             <li className="cursor-pointer hover:opacity-70 transition-opacity"><SocialIcon2 /></li>
             <li className="cursor-pointer hover:opacity-70 transition-opacity"><SocialIcon3 /></li>
