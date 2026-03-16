@@ -60,7 +60,7 @@ const MenuPage = () => {
           <Navbar />
 
           {/* Breadcrumb */}
-        <div className="flex items-center gap-2 text-sm text-gray-500 mb-6">
+        <div className="flex items-center gap-2 text-sm text-gray-500 mb-6 mt-18.25">
           <Link href="/" className="hover:underline cursor-pointer">{t("home")}</Link>
           <span>›</span>
           <span className="text-black font-medium">{t("title")}</span>

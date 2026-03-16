@@ -112,5 +112,24 @@
     "home": "Bosh sahifa",
     "news": "Yangiliklar",
     "gallery": "Galereya"
+  },
+  "ReservationPage": {
+    "home": "Bosh sahifa",
+    "title": "Bron qilish",
+    "workingHours": "Ish vaqtlari",
+    "monday": "Dushanba",
+    "tuesday": "Seshanba",
+    "wednesday": "Chorshanba",
+    "thursday": "Payshanba",
+    "friday": "Juma",
+    "saturday": "Shanba",
+    "sunday": "Yakshanba",
+    "wantToBook": "Stol bron qilmoqchimisiz?",
+    "contactUs": "Biz bilan bog'laning",
+    "writeUs": "Yozing",
+    "callUs": "Qo'ng'iroq qiling",
+    "visitUs": "Tashrif buyuring",
+    "address1": "O'zbekiston, Toshkent",
+    "address2": "Ko'cha, 24"
   }
 }
