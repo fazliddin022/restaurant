@@ -1,21 +1,21 @@
 {
   "SiteHeader": {
-    "signIn": "Sign In"
+    "signIn": "Вход в аккаунт"
   },
   "Navbar": {
-    "menu": "Menu",
-    "news": "News",
-    "reservation": "Reservation",
-    "about": "About Us",
-    "contacts": "Contacts"
+    "menu": "Меню",
+    "news": "Новости",
+    "reservation": "Бронирование",
+    "about": "О нас",
+    "contacts": "Контакты"
   },
   "Hero": {
-    "title": "Delicious food is waiting for you!",
-    "button": "View menu"
+    "title": "Вкусная еда ждет тебя!",
+    "button": "Посмотреть меню"
   },
   "PopularDishes": {
-    "title": "Popular Dishes",
-    "button": "View menu",
+    "title": "Популярные блюда",
+    "button": "Посмотреть меню",
     "dish1": {
       "name": "Chicken Soup",
       "description": "Spicy with Garlic"
@@ -38,74 +38,79 @@
     }
   },
   "TableReservation": {
-    "title": "Reserve a Table",
-    "phonePlaceholder": "Your Phone Number",
-    "peoplePlaceholder": "How many people?",
-    "person1": "1 person",
-    "person2": "2 people",
-    "person3": "3 people",
-    "locationPlaceholder": "Select location",
-    "location1": "Tashkent",
-    "location2": "Andijan",
-    "location3": "Fergana",
-    "mapLink": "Choose location on map",
-    "button": "Reserve"
+    "title": "Забронировать стол",
+    "phonePlaceholder": "Ваш Номер",
+    "peoplePlaceholder": "На сколько человек?",
+    "person1": "1 человек",
+    "person2": "2 человека",
+    "person3": "3 человека",
+    "locationPlaceholder": "Выберите место",
+    "location1": "Ташкент",
+    "location2": "Андижан",
+    "location3": "Фергана",
+    "mapLink": "Выбрать места на карте",
+    "button": "Забронировать"
   },
   "WhyUs": {
-    "title": "Why Choose Us?",
+    "title": "Почему именно мы?",
     "quality": {
-      "title": "Quality Products",
-      "description": "We use only the freshest, highest quality ingredients for every dish"
+      "title": "Качественные продукты",
+      "description": "Используем только свежие продукты высшего качества для каждого блюда"
     },
     "delivery": {
-      "title": "Fast Delivery",
-      "description": "We deliver hot meals right to your door within 30 minutes"
+      "title": "Быстрая доставка",
+      "description": "Доставляем горячие блюда прямо к вашей двери в течение 30 минут"
     },
     "recipes": {
-      "title": "Delicious Recipes",
-      "description": "Unique recipes crafted by the best chefs at our restaurant"
+      "title": "Вкусные рецепты",
+      "description": "Уникальные рецепты, созданные лучшими шеф-поварами нашего ресторана"
     },
     "atmosphere": {
-      "title": "Cozy Atmosphere",
-      "description": "We create a pleasant environment for an unforgettable time with loved ones"
+      "title": "Уютная атмосфера",
+      "description": "Создаём приятную обстановку для незабываемого отдыха с близкими"
     },
     "chefs": {
-      "title": "Experienced Chefs",
-      "description": "Our chefs have years of experience working in the world's best restaurants"
+      "title": "Опытные повара",
+      "description": "Наши повара имеют многолетний опыт работы в лучших ресторанах мира"
     },
     "service": {
-      "title": "Excellent Service",
-      "description": "Friendly staff always ready to help and make your visit enjoyable"
+      "title": "Отличное обслуживание",
+      "description": "Дружелюбный персонал всегда готов помочь и сделать визит приятным"
     }
   },
   "NewsGallery": {
-    "title": "News/Gallery",
-    "button": "View all",
-    "news1": "We're opening a new branch in the center of Tashkent. Come and enjoy our signature dishes in a cozy atmosphere.",
-    "news2": "Presenting our updated menu with seasonal dishes. The chef has prepared special new items just for you.",
-    "news3": "We host a cooking master class every Saturday. Learn to cook our signature dishes together with us."
+    "title": "Новости/Галерея",
+    "button": "Посмотреть все",
+    "news1": "Открываем новый филиал в центре Ташкента. Приходите и насладитесь нашими фирменными блюдами в уютной атмосфере.",
+    "news2": "Представляем обновлённое меню с сезонными блюдами. Шеф-повар приготовил особые новинки специально для вас.",
+    "news3": "Проводим кулинарный мастер-класс каждую субботу. Научитесь готовить наши фирменные блюда вместе с нами."
   },
   "Footer": {
-    "services": "Our Services",
-    "prices": "Pricing",
-    "tracking": "Tracking",
-    "report": "Report an Issue",
-    "terms": "Terms of Service",
-    "company": "Our Company",
-    "reporting": "Reporting",
-    "contact": "Contact Us",
-    "management": "Management",
-    "address": "Address",
-    "street": "Uzbekistan, Tashkent Street, 24"
+    "services": "Наши услуги",
+    "prices": "Цены",
+    "tracking": "Отслеживание",
+    "report": "Сообщить об ошибке",
+    "terms": "Условия услуг",
+    "company": "Наша компания",
+    "reporting": "Отчетность",
+    "contact": "Свяжитесь с нами",
+    "management": "Управление",
+    "address": "Адрес",
+    "street": "Узбекистан, Ташкент Улица, 24"
   },
   "Menu": {
-    "title": "Menu",
-    "home": "Home",
-    "all": "All",
-    "first": "Soups",
-    "second": "Main Course",
-    "salads": "Salads",
-    "drinks": "Drinks",
-    "fastfood": "Fast Food"
+    "title": "Меню",
+    "home": "Главная",
+    "all": "Все",
+    "first": "Первые",
+    "second": "Вторые",
+    "salads": "Салаты",
+    "drinks": "Напитки",
+    "fastfood": "Фаст-Фуд"
+  },
+  "NewsPage": {
+    "home": "Главная",
+    "news": "Новости",
+    "gallery": "Галерея"
   }
 }

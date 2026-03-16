@@ -3,7 +3,8 @@
 import { useState } from "react"
 import { useTranslations } from "next-intl"
 import DishCard from "@/components/customComponents/DishCard"
-import Link from "next/link"
+import Navbar from "./Navbar"
+import { Link } from "@/i18n/navigation"
 
 interface DishItem {
   id: number
@@ -53,8 +54,12 @@ const MenuPage = () => {
   return (
     <section className="py-10">
       <div className="containers">
+        <div className="bg-white/40 rounded-[50px] px-[68px] pb-16">
 
-        {/* Breadcrumb */}
+          {/* Navbar inside */}
+          <Navbar />
+
+          {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-sm text-gray-500 mb-6">
           <Link href="/" className="hover:underline cursor-pointer">{t("home")}</Link>
           <span>›</span>
@@ -97,6 +102,7 @@ const MenuPage = () => {
           </div>
         </div>
 
+      </div>
       </div>
     </section>
   )

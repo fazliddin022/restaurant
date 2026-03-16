@@ -34,12 +34,10 @@ const Navbar = () => {
           <li key={link.id}>
             <Link
               href={link.href}
-              className={`text-lg cursor-pointer relative pb-0.5
-                after:content-[''] after:absolute after:bottom-0 after:left-0
-                after:h-0.5 after:bg-black after:transition-all after:duration-300
+              className={`text-lg cursor-pointer transition-colors duration-200
                 ${pathname === link.href
-                  ? "font-semibold after:w-full"
-                  : "after:w-0 hover:after:w-full"
+                  ? "text-[#FF0000] font-medium"
+                  : "hover:text-[#FF0000]"
                 }`}
             >
               {link.label}
