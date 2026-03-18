@@ -6,5 +6,10 @@ import TableReservation from "./TableReservation"
 import WhyUs from "./WhyUs"
 import NewsGallery from "./NewsGallery"
 import Footer from "./Footer"
+import SignInPage from "./SignInPage"
+import SignUpPage from "./SignUpPage"
 
-export { Hero, SiteHeader, Navbar, PopularDishes, TableReservation, WhyUs, NewsGallery, Footer }
+export {
+  Hero, SiteHeader, Navbar, PopularDishes, TableReservation,
+  WhyUs, NewsGallery, Footer, SignInPage, SignUpPage
+}

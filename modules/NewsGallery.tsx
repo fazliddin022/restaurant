@@ -1,41 +1,56 @@
 import { Button } from "@/components/ui/button"
 import { ArrowRightIcon } from "@/public/icons"
 import { useTranslations } from "next-intl"
-import NewsCard from "@/components/customComponents/NewsCard"
+import { Link } from "@/i18n/navigation"
+import { NewsItem } from "@/@types"
+import Image from "next/image"
 
-const newsList = [
-  { id: 1, img: "/images/gallery-photo.png", description: "", userAvatar: "/images/author-avatar.png", userName: "Сергей" },
-  { id: 2, img: "/images/gallery-photo.png", description: "", userAvatar: "/images/author-avatar.png", userName: "Сергей" },
-  { id: 3, img: "/images/gallery-photo.png", description: "", userAvatar: "/images/author-avatar.png", userName: "Сергей" },
-]
+const IMAGE_URL = process.env.NEXT_PUBLIC_IMAGE_URL || "https://anorkhulov.uz"
 
-const NewsGallery = () => {
+interface Props {
+  news?: NewsItem[]
+}
+
+const NewsGallery = ({ news = [] }: Props) => {
   const t = useTranslations("NewsGallery")
-
-  const filledList = newsList.map((item, i) => ({
-    ...item,
-    description: t(`news${i + 1}` as "news1" | "news2" | "news3"),
-  }))
 
   return (
     <section className="pb-10 pt-19">
       <div className="containers flex flex-col gap-17">
         <h2 className="text-5xl font-bold text-center">{t("title")}</h2>
         <ul className="flex items-center justify-center gap-25 mt-29">
-          {filledList.map((item) => (
-            <NewsCard
+          {news.map((item) => (
+            <li
               key={item.id}
-              img={item.img}
-              description={item.description}
-              userAvatar={item.userAvatar}
-              userName={item.userName}
-            />
+              className="bg-white/40 rounded-[30px] pb-4 flex flex-col items-start gap-3 pl-6 pr-2 hover:bg-white/60 transition-colors duration-300 cursor-pointer"
+            >
+              <Image
+                src={`${IMAGE_URL}/${item.image}`}
+                alt="news-image"
+                width={213}
+                height={157}
+                className="max-w-[213px] w-full h-auto -mt-20 rounded-[30px]"
+              />
+              <p className="mt-3 max-w-[327px]">{item.description}</p>
+              <div className="flex items-center gap-3">
+                <Image
+                  src={`${IMAGE_URL}/${item.author.avatar}`}
+                  alt="avatar"
+                  width={45}
+                  height={45}
+                  className="w-[45px] h-[45px] rounded-full object-cover"
+                />
+                <h2 className="text-lg font-semibold">{item.author.firstName}</h2>
+              </div>
+            </li>
           ))}
         </ul>
         <div className="w-full flex justify-end">
-          <Button className="cursor-pointer py-6! px-5! rounded-br-none gap-2">
-            {t("button")} <ArrowRightIcon />
-          </Button>
+          <Link href="/news">
+            <Button className="cursor-pointer py-6! px-5! rounded-br-none gap-2">
+              {t("button")} <ArrowRightIcon />
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

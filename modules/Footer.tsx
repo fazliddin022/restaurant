@@ -54,11 +54,11 @@ const Footer = () => {
             <li className="cursor-pointer hover:opacity-70 transition-opacity"><SocialIcon4 /></li>
           </ul>
         </div>
-        <div className="flex gap-[179px]">
+        <div className="flex gap-44.75">
           {footerList.map((item) => (
             <ul key={item.id}>
               <h2 className="text-[25px] font-bold">{item.ulTitle}</h2>
-              <div className="flex flex-col gap-2 mt-3 max-w-[160px]">
+              <div className="flex flex-col gap-2 mt-3 max-w-40">
                 {item.children.map((child) => (
                   <li key={child.childId} className="cursor-pointer hover:underline">
                     {child.title}

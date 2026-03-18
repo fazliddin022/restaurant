@@ -17,7 +17,7 @@ const NewsCard = ({ img, description, userAvatar, userName }: NewsCardProps) => 
         height={157}
         className="w-auto h-auto -mt-20 rounded-[30px]"
       />
-      <p className="mt-3 max-w-[327px]">{description}</p>
+      <p className="mt-3 max-w-81.75">{description}</p>
       <div className="flex items-center gap-3">
         <Image
           src={userAvatar}

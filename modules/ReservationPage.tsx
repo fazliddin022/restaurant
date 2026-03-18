@@ -155,8 +155,6 @@ const ReservationPage = () => {
           </div>
         </div>
       </section>
-
-      <NewsGallery />
     </>
   )
 }
