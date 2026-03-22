@@ -16,8 +16,8 @@ const PopularDishes = ({ products }: Props) => {
     <div className="dishes-section py-10">
       <div className="containers">
         <h2 className="font-bold text-5xl text-center">{t("title")}</h2>
-        <Carousel opts={{ align: "start", loop: false }} className="py-20 px-8">
-          <CarouselContent className="-ml-6">
+        <Carousel opts={{ align: "start", loop: false }} className="px-8">
+          <CarouselContent className="-ml-6 pt-20 pb-6">
             {products.map((item) => (
               <CarouselItem key={item.id} className="pl-6 basis-1/4">
                 <DishCard

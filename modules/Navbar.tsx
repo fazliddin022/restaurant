@@ -10,14 +10,21 @@ import { useEffect, useState } from "react"
 const Navbar = () => {
   const t = useTranslations("Navbar")
   const pathname = usePathname()
-  const [username, setUsername] = useState<string | null>(null)
+  const [cartCount, setCartCount] = useState(0)
+
+  function fetchCartCount() {
+    fetch("/api/cart-count", { credentials: "include" })
+      .then(r => r.json())
+      .then(d => setCartCount(d.count ?? 0))
+      .catch(() => setCartCount(0))
+  }
 
   useEffect(() => {
-    const user = localStorage.getItem("user")
-    if (user) {
-      const parsed = JSON.parse(user)
-      setUsername(parsed.username || parsed.firstName || null)
-    }
+    fetchCartCount()
+
+    // Cart yangilanganda qayta fetch qilish
+    window.addEventListener("cart-updated", fetchCartCount)
+    return () => window.removeEventListener("cart-updated", fetchCartCount)
   }, [])
 
   const navLinks = [
@@ -33,7 +40,7 @@ const Navbar = () => {
       <Link href="/">
         <Image
           className="w-34 h-auto"
-          src={"/images/bonappetit-logo.svg"}
+          src="/images/bonappetit-logo.svg"
           alt="website-logo"
           width={136}
           height={71}
@@ -45,10 +52,7 @@ const Navbar = () => {
             <Link
               href={link.href}
               className={`text-lg cursor-pointer transition-colors duration-200
-                ${pathname === link.href
-                  ? "text-[#FF0000] font-medium"
-                  : "hover:text-[#FF0000]"
-                }`}
+                ${pathname === link.href ? "text-[#FF0000] font-medium" : "hover:text-[#FF0000]"}`}
             >
               {link.label}
             </Link>
@@ -56,18 +60,17 @@ const Navbar = () => {
         ))}
       </ul>
       <div className="flex items-center gap-5">
-        {username && (
-          <span className="text-sm font-semibold">{username}</span>
-        )}
-        <Button size={"icon"} className="cursor-pointer rounded-full bg-transparent border-2 border-black pt-0.5 hover:bg-black hover:text-white transition-colors duration-300">
+        <Button size="icon" className="cursor-pointer rounded-full bg-transparent border-2 border-black pt-0.5 hover:bg-black hover:text-white transition-colors duration-300">
           <LikedIcon />
         </Button>
-        <Button size={"icon"} className="cursor-pointer relative rounded-full bg-transparent border-2 border-black pt-0.5 hover:bg-black hover:text-white transition-colors duration-300">
-          <CartIcon />
-          <div className="absolute -top-1 -right-1.5 bg-[#FF0000] w-3.5 h-3.5 rounded-full text-[10px] flex items-center justify-center">
-            <p>1</p>
-          </div>
-        </Button>
+        <Link href="/cart">
+          <Button size="icon" className="cursor-pointer relative rounded-full bg-transparent border-2 border-black pt-0.5 hover:bg-black hover:text-white transition-colors duration-300">
+            <CartIcon />
+            <div className="absolute -top-1 -right-1.5 bg-[#FF0000] w-3.5 h-3.5 rounded-full text-[10px] flex items-center justify-center">
+              <span>{cartCount}</span>
+            </div>
+          </Button>
+        </Link>
       </div>
     </div>
   )

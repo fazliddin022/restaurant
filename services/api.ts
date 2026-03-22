@@ -23,17 +23,11 @@ async function request<T>(url: string, options?: RequestInit): Promise<T> {
 
 // ─── Auth ─────────────────────────────────────────────────────
 export async function signUp(payload: SignUpPayload): Promise<AuthResponse> {
-  return request("/auth/signup", {
-    method: "POST",
-    body: JSON.stringify(payload),
-  })
+  return request("/auth/signup", { method: "POST", body: JSON.stringify(payload) })
 }
 
 export async function signIn(payload: SignInPayload): Promise<AuthResponse> {
-  return request("/auth/signin", {
-    method: "POST",
-    body: JSON.stringify(payload),
-  })
+  return request("/auth/signin", { method: "POST", body: JSON.stringify(payload) })
 }
 
 // ─── Products ─────────────────────────────────────────────────
@@ -55,4 +49,46 @@ export async function getNews(): Promise<{ data: NewsItem[] }> {
 // ─── Galleries ────────────────────────────────────────────────
 export async function getGalleries(): Promise<{ data: GalleryItem[] }> {
   return request("/galleries")
+}
+
+// ─── Cart ─────────────────────────────────────────────────────
+export async function getCart(token: string): Promise<{ data: CartItem[] }> {
+  return request("/cart/current", {
+    headers: { Authorization: `Bearer ${token}` },
+  })
+}
+
+export async function addToCart(
+  token: string,
+  productId: number,
+  quantity: number = 1
+): Promise<{ data: CartItem }> {
+  return request("/cart/items", {
+    method: "POST",
+    body: JSON.stringify({ productId, quantity }),
+    headers: { Authorization: `Bearer ${token}` },
+  })
+}
+
+export async function removeFromCart(
+  token: string,
+  itemId: number
+): Promise<void> {
+  return request(`/cart/items/${itemId}`, {
+    method: "DELETE",
+    headers: { Authorization: `Bearer ${token}` },
+  })
+}
+
+// ─── Cart Types ───────────────────────────────────────────────
+export interface CartItem {
+  id: number
+  quantity: number
+  product: {
+    id: number
+    name: string
+    description: string
+    price: string
+    image: string
+  }
 }

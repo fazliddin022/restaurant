@@ -32,8 +32,13 @@ function isValidDate(date: Date | undefined) {
 export function DatePickerInput() {
   const [open, setOpen] = React.useState(false)
   const [date, setDate] = React.useState<Date | undefined>(undefined) // start with no date
-  const [month, setMonth] = React.useState<Date | undefined>(new Date()) // calendar shows current month
+  const [month, setMonth] = React.useState<Date | undefined>(undefined)
   const [value, setValue] = React.useState("") // input initially empty
+
+  React.useEffect(() => {
+    // Set runtime month only on client to keep server/client initial HTML identical.
+    setMonth(new Date())
+  }, [])
 
   return (
     <Field className="mx-auto ">

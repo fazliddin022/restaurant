@@ -28,7 +28,7 @@ const Hero = () => {
             </Button>
           </div>
           <Image
-            className="w-auto h-auto drop-shadow-2xl"
+            className="w-[613px] h-auto drop-shadow-2xl"
             src={"/images/hero-salmon-dish.png"}
             alt="hero-salmon-dish"
             width={613}

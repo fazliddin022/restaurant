@@ -71,7 +71,7 @@ const TableReservation = () => {
         </div>
       </form>
       <Image
-        className="w-auto h-auto absolute -right-5"
+        className="w-256.25 h-auto absolute -right-5"
         src={"/images/reservation-pizza.png"}
         alt="reservation-pizza"
         width={1025}
