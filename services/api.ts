@@ -17,7 +17,12 @@ async function request<T>(url: string, options?: RequestInit): Promise<T> {
     cache: "no-store",
   })
   const data = await res.json()
-  if (!res.ok) throw new Error(data?.message?.[0] || "Request failed")
+  if (!res.ok) {
+    const msg = Array.isArray(data?.message)
+      ? data.message[0]
+      : (data?.message || "Request failed")
+    throw new Error(msg)
+  }
   return data
 }
 
@@ -25,7 +30,6 @@ async function request<T>(url: string, options?: RequestInit): Promise<T> {
 export async function signUp(payload: SignUpPayload): Promise<AuthResponse> {
   return request("/auth/signup", { method: "POST", body: JSON.stringify(payload) })
 }
-
 export async function signIn(payload: SignInPayload): Promise<AuthResponse> {
   return request("/auth/signin", { method: "POST", body: JSON.stringify(payload) })
 }
@@ -34,6 +38,9 @@ export async function signIn(payload: SignInPayload): Promise<AuthResponse> {
 export async function getProducts(categoryId?: number): Promise<{ data: Product[] }> {
   const query = categoryId ? `?categoryId=${categoryId}` : ""
   return request(`/products${query}`)
+}
+export async function getProductById(id: number): Promise<{ data: Product }> {
+  return request(`/products/${id}`)
 }
 
 // ─── Categories ───────────────────────────────────────────────
@@ -52,43 +59,93 @@ export async function getGalleries(): Promise<{ data: GalleryItem[] }> {
 }
 
 // ─── Cart ─────────────────────────────────────────────────────
-export async function getCart(token: string): Promise<{ data: CartItem[] }> {
-  return request("/cart/current", {
+export async function getCart(token: string, userId: number): Promise<{ data: CartResponse }> {
+  return request(`/cart/current?userId=${userId}`, {
     headers: { Authorization: `Bearer ${token}` },
   })
 }
 
 export async function addToCart(
   token: string,
+  userId: number,
   productId: number,
-  quantity: number = 1
-): Promise<{ data: CartItem }> {
+  quantity = 1
+): Promise<{ data: CartResponse }> {
   return request("/cart/items", {
     method: "POST",
-    body: JSON.stringify({ productId, quantity }),
+    body: JSON.stringify({ userId, productId, quantity }),
     headers: { Authorization: `Bearer ${token}` },
   })
 }
 
-export async function removeFromCart(
+// ─── Reservation ──────────────────────────────────────────────
+export async function getTables(): Promise<{ data: Table[] }> {
+  return request("/restaurant-tables")
+}
+export async function createReservation(
   token: string,
-  itemId: number
-): Promise<void> {
-  return request(`/cart/items/${itemId}`, {
-    method: "DELETE",
+  payload: ReservationPayload
+): Promise<unknown> {
+  return request("/reservations/create", {
+    method: "POST",
+    body: JSON.stringify(payload),
     headers: { Authorization: `Bearer ${token}` },
   })
 }
 
-// ─── Cart Types ───────────────────────────────────────────────
+// ─── Contact ──────────────────────────────────────────────────
+export async function sendContact(payload: ContactPayload): Promise<unknown> {
+  return request("/contact", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  })
+}
+
+// ─── Types ────────────────────────────────────────────────────
 export interface CartItem {
   id: number
   quantity: number
+  note: string | null
+  unitPrice: number
+  totalPrice: number
   product: {
     id: number
     name: string
-    description: string
-    price: string
     image: string
+    price: number
+    isAvailable: boolean
   }
+}
+
+export interface CartResponse {
+  id: number
+  status: string
+  user: unknown
+  table: unknown
+  itemCount: number
+  subtotal: number
+  items: CartItem[]
+}
+
+export interface Table {
+  id: number
+  tableNumber: number
+  capacity: number
+  location: string
+  status: "AVAILABLE" | "OCCUPIED" | "RESERVED"
+}
+
+export interface ReservationPayload {
+  email: string
+  guestCount: number
+  reservationDate: string
+  reservationTime: string
+  tableId: number
+}
+
+export interface ContactPayload {
+  name: string
+  email: string
+  phone: string
+  message: string
 }

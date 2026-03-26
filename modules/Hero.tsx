@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import Navbar from "./Navbar"
 import { ArrowRightIcon } from "@/public/icons"

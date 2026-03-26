@@ -1,3 +1,5 @@
+"use client"
+
 import { ProductIcon, DeliveryIcon, ReceptIcon, AtmosphereIcon, ChefIcon, ServiceIcon } from "@/public/icons"
 import { useTranslations } from "next-intl"
 import { ReactNode } from "react"

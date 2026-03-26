@@ -6,10 +6,12 @@ export async function GET() {
   try {
     const cookieStore = await cookies()
     const token = cookieStore.get("token")?.value
-    if (!token) return NextResponse.json({ count: 0 })
+    const userId = cookieStore.get("userId")?.value
+    if (!token || !userId) return NextResponse.json({ count: 0 })
 
-    const cart = await getCart(token)
-    return NextResponse.json({ count: cart?.data?.length ?? 0 })
+    const cartRes = await getCart(token, Number(userId))
+    const count = cartRes?.data?.itemCount ?? cartRes?.data?.items?.length ?? 0
+    return NextResponse.json({ count })
   } catch {
     return NextResponse.json({ count: 0 })
   }

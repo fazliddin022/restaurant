@@ -1,6 +1,6 @@
+"use client"
+
 import Navbar from "./Navbar"
-import { NewsGallery } from "@/modules"
-import { DatePickerInput } from "@/components/customComponents/ReservationDatePicker"
 import { Input } from "@/components/ui/input"
 import { InputGroup, InputGroupInput } from "@/components/ui/input-group"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
@@ -8,9 +8,34 @@ import { Button } from "@/components/ui/button"
 import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/navigation"
 import Image from "next/image"
+import { useState, useEffect } from "react"
+import { getTables, createReservation, Table } from "@/services/api"
+import { toast } from "sonner"
+import { getCookie } from "cookies-next"
+import React from "react"
+
+// Faqat haqiqiy stollar (3x3 grid) — bosiladi
+const TABLE_LAYOUT = [
+  { slot: "mid-1", cx: 340, cy: 130, r: 85, tableNumber: 1 },
+  { slot: "mid-2", cx: 545, cy: 130, r: 85, tableNumber: 2 },
+  { slot: "mid-3", cx: 750, cy: 130, r: 85, tableNumber: 3 },
+  { slot: "mid-4", cx: 340, cy: 320, r: 85, tableNumber: 4 },
+  { slot: "mid-5", cx: 545, cy: 320, r: 85, tableNumber: 5 },
+  { slot: "mid-6", cx: 750, cy: 320, r: 85, tableNumber: 6 },
+  { slot: "mid-7", cx: 340, cy: 510, r: 85, tableNumber: 7 },
+  { slot: "mid-8", cx: 545, cy: 510, r: 85, tableNumber: 8 },
+]
+
+function getTableColor(status: string, selected: boolean) {
+  if (selected) return "#1a56db"
+  if (status === "AVAILABLE") return "#16a34a"
+  if (status === "OCCUPIED")  return "#b91c1c"
+  if (status === "RESERVED")  return "#ca8a04"
+  return "#9ca3af"
+}
 
 const ReservationPage = () => {
-  const t = useTranslations("ReservationPage")
+  const t  = useTranslations("ReservationPage")
   const tr = useTranslations("TableReservation")
 
   const workingHours = [
@@ -56,6 +81,81 @@ const ReservationPage = () => {
     },
   ]
 
+  const [tables, setTables]                   = useState<Table[]>([])
+  const [selectedTableId, setSelectedTableId] = useState<number | null>(null)
+  const [loadingTables, setLoadingTables]     = useState(false)
+  const [submitting, setSubmitting]           = useState(false)
+  const [showMapModal, setShowMapModal]       = useState(false)
+  const [form, setForm] = useState({
+    email: "",
+    guestCount: "1",
+    reservationDate: "",
+    reservationTime: "",
+  })
+
+  // Backenddan kelgan unique location'lar (modal uchun)
+
+  useEffect(() => {
+    setLoadingTables(true)
+    getTables()
+      .then((res) => setTables(res.data ?? []))
+      .catch(() => toast.error("Stollarni yuklashda xatolik"))
+      .finally(() => setLoadingTables(false))
+  }, [])
+
+  function getTableStatus(tableNumber: number): string {
+    return tables.find((t) => t.tableNumber === tableNumber)?.status ?? "AVAILABLE"
+  }
+  function getTableId(tableNumber: number): number | null {
+    return tables.find((t) => t.tableNumber === tableNumber)?.id ?? null
+  }
+
+  function handleTableClick(tableNumber: number) {
+    const status = getTableStatus(tableNumber)
+    if (status === "OCCUPIED") {
+      toast.error("Bu stol hozir band!", { position: "top-center" })
+      return
+    }
+    const id = getTableId(tableNumber)
+    setSelectedTableId(id)
+    toast.success(`Stol #${tableNumber} tanlandi`, { position: "top-center" })
+  }
+
+  async function handleSubmit() {
+    if (!selectedTableId) {
+      toast.error("Iltimos stol tanlang!", { position: "top-center" })
+      return
+    }
+    if (!form.email || !form.reservationDate || !form.reservationTime) {
+      toast.error("Ism, sana va vaqtni to'ldiring!", { position: "top-center" })
+      return
+    }
+    const token = getCookie("token") as string | undefined
+    if (!token) {
+      toast.error("Bron qilish uchun tizimga kiring!", { position: "top-center" })
+      return
+    }
+    setSubmitting(true)
+    try {
+      await createReservation(token, {
+        email: form.email,
+        guestCount: Number(form.guestCount),
+        reservationDate: form.reservationDate,
+        reservationTime: form.reservationTime,
+        tableId: selectedTableId,
+      })
+      toast.success("Bron muvaffaqiyatli amalga oshirildi!", { position: "top-center" })
+      setSelectedTableId(null)
+      setForm({ email: "", guestCount: "1", reservationDate: "", reservationTime: "" })
+      getTables().then((res) => setTables(res.data ?? [])).catch(() => {})
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Xatolik yuz berdi"
+      toast.error(message, { position: "top-center" })
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
   return (
     <>
       <section className="py-10">
@@ -64,17 +164,15 @@ const ReservationPage = () => {
 
             <Navbar />
 
-            {/* Breadcrumb */}
             <div className="flex items-center gap-2 text-sm text-gray-500 mb-8 mt-18.25">
               <Link href="/" className="hover:underline cursor-pointer">{t("home")}</Link>
               <span>›</span>
               <span className="text-black font-medium">{t("title")}</span>
             </div>
 
-            {/* Title */}
             <h1 className="text-5xl font-bold text-center mb-14">{t("title")}</h1>
 
-            {/* ── Working Hours + Image ── */}
+            {/* Ish vaqtlari + Rasm */}
             <div className="flex items-center justify-between gap-10 mb-16">
               <div className="w-[554px] shrink-0">
                 <h2 className="text-2xl font-bold mb-6">{t("workingHours")}</h2>
@@ -100,45 +198,174 @@ const ReservationPage = () => {
               </div>
             </div>
 
-            {/* ── Reservation Form ── */}
+            {/* ── Stol xaritasi MODAL ── */}
+            {showMapModal && (
+              <div
+                className="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
+                onClick={() => setShowMapModal(false)}
+              >
+                <div
+                  className="bg-white rounded-[24px] p-8 w-full max-w-[860px] mx-4 relative"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {/* Yopish tugmasi */}
+                  <button
+                    onClick={() => setShowMapModal(false)}
+                    className="absolute top-4 right-5 text-2xl text-gray-500 hover:text-black cursor-pointer"
+                  >
+                    ✕
+                  </button>
+
+                  <h2 className="text-2xl font-bold text-center mb-4">Выберите место</h2>
+
+                  {/* Legend */}
+                  <div className="flex items-center gap-5 justify-end mb-3 text-sm font-medium">
+                    <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-green-600 inline-block"/>Bo&apos;sh</span>
+                    <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-red-700 inline-block"/>Hozir band</span>
+                    <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-yellow-500 inline-block"/>Bugun band</span>
+                    <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-blue-600 inline-block"/>Tanlangan</span>
+                  </div>
+
+                  {loadingTables ? (
+                    <div className="flex justify-center items-center h-[480px] text-gray-500">Yuklanmoqda...</div>
+                  ) : (
+                    <svg viewBox="0 0 880 640" xmlns="http://www.w3.org/2000/svg" className="w-full rounded-[16px] bg-gray-50">
+                      {/* Вход */}
+                      <rect x="340" y="565" width="140" height="58" rx="12" fill="#e5e7eb"/>
+                      <text x="410" y="599" textAnchor="middle" fontSize="15" fill="#374151" fontWeight="600">Вход</text>
+                      {/* Окна */}
+                      <rect x="848" y="40"  width="22" height="120" rx="6" fill="#d1d5db"/>
+                      <rect x="848" y="220" width="22" height="120" rx="6" fill="#d1d5db"/>
+                      <rect x="848" y="400" width="22" height="120" rx="6" fill="#d1d5db"/>
+                      <text x="876" y="310" textAnchor="middle" fontSize="12" fill="#9ca3af" transform="rotate(90 876 310)">Окна</text>
+
+                      {/* Chap dekor ovallar — zona belgisi */}
+                      <ellipse cx="105" cy="175" rx="65" ry="115" fill={
+                        tables.slice(0,3).every(t => t.status === "AVAILABLE") ? "#16a34a" :
+                        tables.slice(0,3).some(t => t.status === "OCCUPIED") ? "#b91c1c" : "#ca8a04"
+                      }/>
+                      <ellipse cx="105" cy="435" rx="65" ry="115" fill={
+                        tables.slice(3).every(t => t.status === "AVAILABLE") ? "#16a34a" :
+                        tables.slice(3).some(t => t.status === "OCCUPIED") ? "#b91c1c" : "#ca8a04"
+                      }/>
+
+                      {/* Haqiqiy stollar */}
+                      {TABLE_LAYOUT.map((tbl) => {
+                        const status   = getTableStatus(tbl.tableNumber)
+                        const tblId    = getTableId(tbl.tableNumber)
+                        const selected = tblId !== null && tblId === selectedTableId
+                        const color    = getTableColor(status, selected)
+                        const blocked  = status === "OCCUPIED"
+                        return (
+                          <g key={tbl.slot} onClick={() => {
+                            handleTableClick(tbl.tableNumber)
+                            if (status !== "OCCUPIED") setShowMapModal(false)
+                          }} style={{ cursor: blocked ? "not-allowed" : "pointer" }}>
+                            <circle cx={tbl.cx} cy={tbl.cy} r={tbl.r} fill={color}/>
+                            <text
+                              x={tbl.cx} y={tbl.cy + 6}
+                              textAnchor="middle" fontSize="13" fontWeight="700" fill="white"
+                            >#{tbl.tableNumber}</text>
+                          </g>
+                        )
+                      })}
+                    </svg>
+                  )}
+
+                  {selectedTableId && (
+                    <p className="mt-3 text-center text-sm font-semibold text-blue-700">
+                      ✅ Stol #{tables.find((t) => t.id === selectedTableId)?.tableNumber} tanlandi
+                    </p>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* ── Forma ── */}
             <h2 className="text-4xl font-bold text-center mb-10">{t("wantToBook")}</h2>
 
             <div className="flex flex-col gap-8 max-w-[600px] mx-auto">
               <Input
-                placeholder={tr("phonePlaceholder")}
+                placeholder="Email *"
+                type="email"
+                value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
                 className="border-transparent border-b-black rounded-none px-0 py-5 text-base! bg-transparent"
               />
-              <Select>
+              <Select value={form.guestCount} onValueChange={(v) => setForm({ ...form, guestCount: v })}>
                 <SelectTrigger className="w-full border-transparent border-b-black rounded-none px-0 py-5 text-base!">
                   <SelectValue placeholder={tr("peoplePlaceholder")} />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
-                    <SelectItem value="1">{tr("person1")}</SelectItem>
+                    {[1,2,3,4,5,6,7,8].map((n) => (
+                      <SelectItem key={n} value={String(n)}>{n} kishi</SelectItem>
+                    ))}
                   </SelectGroup>
                 </SelectContent>
               </Select>
-              <DatePickerInput />
+              <Input
+                type="date"
+                value={form.reservationDate}
+                onChange={(e) => setForm({ ...form, reservationDate: e.target.value })}
+                className="border-transparent border-b-black rounded-none px-0 py-5 text-base! bg-transparent"
+              />
               <InputGroup>
-                <InputGroupInput type="time" className="border-b text-base! border-black" />
+                <InputGroupInput
+                  type="time"
+                  value={form.reservationTime}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, reservationTime: e.target.value })}
+                  className="border-b text-base! border-black"
+                />
               </InputGroup>
-              <Select>
+
+              {/* Stol tanlash — backenddan */}
+              <Select
+                value={selectedTableId ? String(selectedTableId) : ""}
+                onValueChange={(v) => setSelectedTableId(Number(v))}
+              >
                 <SelectTrigger className="w-full border-transparent border-b-black rounded-none px-0 py-5 text-base!">
                   <SelectValue placeholder={tr("locationPlaceholder")} />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
-                    <SelectItem value="1">{tr("location1")}</SelectItem>
+                    {tables.map((table) => (
+                      <SelectItem
+                        key={table.id}
+                        value={String(table.id)}
+                        disabled={table.status === "OCCUPIED"}
+                      >
+                        Stol #{table.tableNumber} — {table.location}
+                        {table.status === "OCCUPIED" ? " (band)" : table.status === "RESERVED" ? " (bugun band)" : ""}
+                      </SelectItem>
+                    ))}
                   </SelectGroup>
                 </SelectContent>
               </Select>
-              <p className="text-[#06004C] text-sm cursor-pointer -mt-4">{tr("mapLink")}</p>
+
+              {/* Xaritadan stol tanlash */}
+              <p
+                onClick={() => setShowMapModal(true)}
+                className="text-[#06004C] text-sm cursor-pointer -mt-4 hover:underline"
+              >
+                {selectedTableId
+                  ? `✅ Stol #${tables.find((t) => t.id === selectedTableId)?.tableNumber} tanlangan — o'zgartirish`
+                  : tr("mapLink")
+                }
+              </p>
+
               <div className="flex justify-end">
-                <Button className="cursor-pointer py-6! px-9!">{tr("button")}</Button>
+                <Button
+                  onClick={handleSubmit}
+                  disabled={submitting}
+                  className="cursor-pointer py-6! px-9!"
+                >
+                  {submitting ? "Yuborilmoqda..." : tr("button")}
+                </Button>
               </div>
             </div>
 
-            {/* ── Contact Us ── */}
+            {/* Contact */}
             <h2 className="text-4xl font-bold text-center mt-16 mb-12">{t("contactUs")}</h2>
             <div className="flex items-start justify-center gap-24">
               {contacts.map((c) => (

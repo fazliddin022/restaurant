@@ -1,40 +1,21 @@
 "use server"
 
 import { cookies } from "next/headers"
+import { addToCart } from "@/services/api"
 
 export async function addToCartAction(productId: number) {
   const cookieStore = await cookies()
   const token = cookieStore.get("token")?.value
+  const userId = cookieStore.get("userId")?.value
 
-  console.log("token:", token ? "exists" : "NOT FOUND")
-
-  if (!token) {
+  if (!token || !userId) {
     return { success: false, message: "Login qiling" }
   }
 
   try {
-    const BASE = process.env.NEXT_PUBLIC_API_URL || "https://anorkhulov.uz/api"
-    const res = await fetch(`${BASE}/cart/items`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ productId, quantity: 1 }),
-      cache: "no-store",
-    })
-
-    const data = await res.json()
-    console.log("cart response:", res.status, JSON.stringify(data))
-
-    if (!res.ok) {
-      return { success: false, message: data?.message?.[0] || "Xatolik" }
-    }
-
+    await addToCart(token, Number(userId), productId, 1)
     return { success: true }
   } catch (err: unknown) {
-    console.error("addToCart error:", err)
-    return { success: false, message: "Server xatosi" }
+    return { success: false, message: err instanceof Error ? err.message : "Xatolik" }
   }
 }
-

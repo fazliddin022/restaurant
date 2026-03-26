@@ -1,3 +1,5 @@
+"use client"
+
 import { SocialIcon1, SocialIcon2, SocialIcon3, SocialIcon4 } from "@/public/icons"
 import { useTranslations } from "next-intl"
 import Image from "next/image"

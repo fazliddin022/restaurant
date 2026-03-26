@@ -65,3 +65,29 @@ export interface GalleryItem {
   id: number
   image: string
 }
+
+
+export interface CartItem {
+  id: number           // cart item id (PATCH/DELETE uchun)
+  quantity: number
+  note: string | null
+  unitPrice: number
+  totalPrice: number
+  product: {
+    id: number
+    name: string
+    image: string
+    price: number
+    isAvailable: boolean
+  }
+}
+
+export interface CartResponse {
+  id: number
+  status: string
+  user: unknown
+  table: unknown
+  itemCount: number
+  subtotal: number
+  items: CartItem[]
+}

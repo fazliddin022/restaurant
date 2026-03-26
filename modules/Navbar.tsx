@@ -11,6 +11,13 @@ const Navbar = () => {
   const t = useTranslations("Navbar")
   const pathname = usePathname()
   const [cartCount, setCartCount] = useState(0)
+  const [isMounted, setIsMounted] = useState(false)
+
+  function normalizePath(path: string) {
+    if (!path) return "/"
+    if (path.length > 1 && path.endsWith("/")) return path.slice(0, -1)
+    return path
+  }
 
   function fetchCartCount() {
     fetch("/api/cart-count", { credentials: "include" })
@@ -21,11 +28,14 @@ const Navbar = () => {
 
   useEffect(() => {
     fetchCartCount()
+    setIsMounted(true)
 
     // Cart yangilanganda qayta fetch qilish
     window.addEventListener("cart-updated", fetchCartCount)
     return () => window.removeEventListener("cart-updated", fetchCartCount)
   }, [])
+
+  const currentPath = isMounted ? normalizePath(pathname) : ""
 
   const navLinks = [
     { id: 1, label: t("menu"),        href: "/menu"        },
@@ -52,7 +62,7 @@ const Navbar = () => {
             <Link
               href={link.href}
               className={`text-lg cursor-pointer transition-colors duration-200
-                ${pathname === link.href ? "text-[#FF0000] font-medium" : "hover:text-[#FF0000]"}`}
+                ${currentPath === normalizePath(link.href) ? "text-[#FF0000] font-medium" : "hover:text-[#FF0000]"}`}
             >
               {link.label}
             </Link>

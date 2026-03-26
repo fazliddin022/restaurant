@@ -39,7 +39,7 @@
   },
   "TableReservation": {
     "title": "Reserve a Table",
-    "phonePlaceholder": "Your Phone Number",
+    "phonePlaceholder": "Email",
     "peoplePlaceholder": "How many people?",
     "person1": "1 person",
     "person2": "2 people",
@@ -131,5 +131,36 @@
     "visitUs": "Visit us",
     "address1": "Uzbekistan, Tashkent",
     "address2": "Street, 24"
+  },
+  "AboutPage": {
+    "home": "Home",
+    "breadcrumb": "About Us",
+    "title": "About Us",
+    "ourFoodTitle": "Our Food",
+    "menuBtn": "View menu",
+    "ourJourneyTitle": "Our Journey",
+    "teamTitle": "Our Team",
+    "intro1": "Since 1995, our mission has been to nourish and inspire every team member, guest, and community we serve. These core values remain the foundation of everything we do. From our menu to our services and the way we do business — our fresh, unexpected and human approach sets us apart. We call it Extraordinary Goodness, and it's in everything we do.",
+    "intro2": "With more than 450 restaurants in 26 states and over 8,000 team members, we've been named by Forbes as one of America's Best Employers for Diversity two years in a row. The Denver Business Journal recognized us as one of the best places to work. We believe these achievements are rooted in our unique and caring culture — one that makes every person who walks through our doors feel welcomed and valued.",
+    "ourFoodText1": "Our passion is creating exceptional food experiences at a great price. From traditional and contemporary dishes to our own culinary creations, such as our premium stuffed tortelloni, our freshly prepared recipes stand out for their individuality, creativity and vibrant flavors from cuisines around the world.",
+    "ourFoodText2": "From Penne Rosa to Japanese noodles, Honey salad and the world-famous Wisconsin Mac & Cheese — we use only the finest and most wholesome ingredients. Every dish is made fresh and to order. Our rich menu is filled with bright, vibrant and delightful flavors.",
+    "ourJourneyText1": "From the very beginning, we committed to offering fresh ingredients and a new perspective on caring for our guests, team members, and communities. We sincerely believe there's nothing that can bring people together or make the world a better place quite like a bowl of noodles.",
+    "ourJourneyText2": "As we continue to grow, we're implementing key initiatives across our company to support a bright future. Our impact report explores some of these areas, such as creating a menu filled with fresh and exciting new flavors, activating industry-leading people benefits, and some ways to better care for our communities — and our planet — that we call home."
+  },
+  "ContactPage": {
+    "title": "Contacts",
+    "breadcrumb": "Contacts",
+    "home": "Home",
+    "writeUs": "Write to us",
+    "callUs": "Call us",
+    "visitUs": "Visit us",
+    "address1": "Uzbekistan, Tashkent",
+    "address2": "Street, 24",
+    "formTitle": "Write to us",
+    "namePlaceholder": "Your name",
+    "emailPlaceholder": "Your E-mail",
+    "phonePlaceholder": "Your phone number",
+    "messagePlaceholder": "Your message",
+    "sendBtn": "Send"
   }
 }

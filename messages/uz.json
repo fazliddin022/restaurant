@@ -39,7 +39,7 @@
   },
   "TableReservation": {
     "title": "Stol bron qilish",
-    "phonePlaceholder": "Telefon raqamingiz",
+    "phonePlaceholder": "Email",
     "peoplePlaceholder": "Necha kishi?",
     "person1": "1 kishi",
     "person2": "2 kishi",
@@ -131,5 +131,36 @@
     "visitUs": "Tashrif buyuring",
     "address1": "O'zbekiston, Toshkent",
     "address2": "Ko'cha, 24"
+  },
+  "AboutPage": {
+    "home": "Bosh sahifa",
+    "breadcrumb": "Biz haqimizda",
+    "title": "Biz haqimizda",
+    "ourFoodTitle": "Bizning taomlar",
+    "menuBtn": "Menyuni ko'rish",
+    "ourJourneyTitle": "Bizning yo'limiz",
+    "teamTitle": "Bizning jamoa",
+    "intro1": "1995 yildan boshlab bizning missiyamiz — har bir jamoa a'zosini, mehmonni va xizmat qiladigan hamjamiyatni oziqlantirib, ilhomlantirishdir. Bu asosiy qadriyatlar bizning hamma ishlarimiz asosida qolmoqda. Menyumizdan tortib xizmatlarimiz va biznes yuritish usullarigacha — bizning yangi, kutilmagan va insoniy yondashuvimiz biz haqimizda gapiradi. Biz buni G'ayrioddiy Yaxshilik deb ataymiz.",
+    "intro2": "26 shtatda 450 dan ortiq restoran va 8000 dan ortiq jamoa a'zolari bilan, Forbes tomonidan ikki yil ketma-ket diversitlik bo'yicha eng yaxshi ish beruvchi sifatida tan olindik. Denver biznes jurnali bizni eng yaxshi ish joylari ro'yxatiga kiritdi. Bu muvaffaqiyatlar bizning noyob va g'amxo'r madaniyatimizga asoslangan deb hisoblaymiz — bu madaniyat har bir kirib kelgan mehmonni xush kelibsiz his ettiradi.",
+    "ourFoodText1": "Bizning ishtiyoqimiz — arzon narxda ajoyib ovqatlanish tajribasini yaratishdir. An'anaviy va zamonaviy taomlardan tortib bizning o'zimizning kulinariya yaratiqlarigacha — bizning yangi tayyorlangan retseptlarimiz individuallik, ijodkorlik va dunyo oshxonalarining yorqin ta'mi bilan ajralib turadi.",
+    "ourFoodText2": "«Penne Roza»dan yapon lapshigacha, «Asal» salatidan «Viskonsin» pishloqli makaron bilan mashhuriga qadar — biz faqat eng yaxshi va foydali ingredientlardan foydalanamiz. Har bir taom yangi va buyurtmaga tayyorlanadi. Bizning boy menyumiz yorqin va yoqimli ta'mlarga to'la.",
+    "ourJourneyText1": "Boshidan boshlab biz mehmonlarimiz, jamoa a'zolarimiz va hamjamiyatlarimizga g'amxo'rlik qilishda yangi yondashuv taklif etishni o'z zimmasiga olganmiz. Biz chinakamiga ishonамизки, odamlarni birlashtirishi yoki dunyoni yaxshilashi mumkin bo'lgan narsadan ko'ra yaxshiroq narsa yo'q.",
+    "ourJourneyText2": "O'sishda davom etar ekanmiz, yorug' kelajakni qo'llab-quvvatlash uchun butun kompaniyamizda asosiy tashabbuslarni amalga oshirmoqdamiz. Ta'sir hisobotimizda yangi va hayajonli ta'mlar bilan to'ldirilgan menyu yaratish, soha bo'yicha eng yaxshi imtiyozlarni faollashtirish va hamjamiyatlarimizga yaxshiroq g'amxo'rlik qilish yo'llari ko'rib chiqiladi."
+  },
+  "ContactPage": {
+    "title": "Aloqa",
+    "breadcrumb": "Aloqa",
+    "home": "Bosh sahifa",
+    "writeUs": "Yozing",
+    "callUs": "Qo'ng'iroq qiling",
+    "visitUs": "Tashrif buyuring",
+    "address1": "O'zbekiston, Toshkent",
+    "address2": "Ko'cha, 24",
+    "formTitle": "Bizga yozing",
+    "namePlaceholder": "Ismingiz",
+    "emailPlaceholder": "E-mail",
+    "phonePlaceholder": "Telefon raqamingiz",
+    "messagePlaceholder": "Xabaringiz",
+    "sendBtn": "Yuborish"
   }
 }
