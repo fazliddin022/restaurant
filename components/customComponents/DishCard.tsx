@@ -37,7 +37,7 @@ const DishCard = ({ id, name, description, price, img }: DishCardProps) => {
           alt={name}
           width={224}
           height={217}
-          className="max-w-[224px] w-full h-auto -mt-20"
+          className="max-w-[224px] w-full h-[217px] object-cover -mt-20 rounded-full"
         />
         <div className="w-full px-5 h-full flex flex-col justify-between pb-4">
           <div>

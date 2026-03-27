@@ -6,6 +6,12 @@ import {
   Category,
   NewsItem,
   GalleryItem,
+  TeamMember,
+  CartItem,
+  CartResponse,
+  Table,
+  ReservationPayload,
+  ContactPayload,
 } from "@/@types"
 
 const BASE = process.env.NEXT_PUBLIC_API_URL || "https://anorkhulov.uz/api"
@@ -58,6 +64,11 @@ export async function getGalleries(): Promise<{ data: GalleryItem[] }> {
   return request("/galleries")
 }
 
+// ─── Team ─────────────────────────────────────────────────────
+export async function getCooks(): Promise<{ data: TeamMember[] }> {
+  return request("/cook")
+}
+
 // ─── Cart ─────────────────────────────────────────────────────
 export async function getCart(token: string, userId: number): Promise<{ data: CartResponse }> {
   return request(`/cart/current?userId=${userId}`, {
@@ -74,6 +85,20 @@ export async function addToCart(
   return request("/cart/items", {
     method: "POST",
     body: JSON.stringify({ userId, productId, quantity }),
+    headers: { Authorization: `Bearer ${token}` },
+  })
+}
+
+export async function removeCartItem(token: string, itemId: number): Promise<unknown> {
+  return request(`/cart/items/${itemId}`, {
+    method: "DELETE",
+    headers: { Authorization: `Bearer ${token}` },
+  })
+}
+
+export async function clearCart(token: string, userId: number): Promise<unknown> {
+  return request(`/cart/clear?userId=${userId}`, {
+    method: "DELETE",
     headers: { Authorization: `Bearer ${token}` },
   })
 }
@@ -101,51 +126,4 @@ export async function sendContact(payload: ContactPayload): Promise<unknown> {
   })
 }
 
-// ─── Types ────────────────────────────────────────────────────
-export interface CartItem {
-  id: number
-  quantity: number
-  note: string | null
-  unitPrice: number
-  totalPrice: number
-  product: {
-    id: number
-    name: string
-    image: string
-    price: number
-    isAvailable: boolean
-  }
-}
-
-export interface CartResponse {
-  id: number
-  status: string
-  user: unknown
-  table: unknown
-  itemCount: number
-  subtotal: number
-  items: CartItem[]
-}
-
-export interface Table {
-  id: number
-  tableNumber: number
-  capacity: number
-  location: string
-  status: "AVAILABLE" | "OCCUPIED" | "RESERVED"
-}
-
-export interface ReservationPayload {
-  email: string
-  guestCount: number
-  reservationDate: string
-  reservationTime: string
-  tableId: number
-}
-
-export interface ContactPayload {
-  name: string
-  email: string
-  phone: string
-  message: string
-}
+// Types are now in @/@types/index.ts

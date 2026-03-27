@@ -1,6 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
+import { Link } from "@/i18n/navigation"
 import Navbar from "./Navbar"
 import { ArrowRightIcon } from "@/public/icons"
 import { useTranslations } from "next-intl"
@@ -25,9 +26,9 @@ const Hero = () => {
             <h2 className="text-6xl tracking-wide font-black leading-tight uppercase mb-4.25">
               {t("title")}
             </h2>
-            <Button className="cursor-pointer py-6! px-6! rounded-br-none gap-2">
+            <Link href="/menu"><Button className="cursor-pointer py-6! px-6! rounded-br-none gap-2">
               {t("button")} <ArrowRightIcon />
-            </Button>
+            </Button></Link>
           </div>
           <Image
             className="w-[613px] h-auto drop-shadow-2xl"

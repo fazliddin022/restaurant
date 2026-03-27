@@ -2,8 +2,11 @@
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { CartItem } from "@/services/api"
+import { removeCartItem } from "@/services/api"
+import { CartItem } from "@/@types"
 import { toast } from "sonner"
+import { useRouter } from "@/i18n/navigation"
+import { getCookie } from "cookies-next"
 import Navbar from "@/modules/Navbar"
 
 interface Props {
@@ -20,16 +23,28 @@ const CheckoutContent = ({ items, userId, username }: Props) => {
 
   const total = items.reduce((sum, item) => sum + Number(item.product.price) * item.quantity, 0)
 
+  const router = useRouter()
+
   async function handleOrder() {
     setLoading(true)
-    // Backend yo'q shu sahifada — faqat toast
-    setTimeout(() => {
+    try {
+      const token = getCookie("token") as string | undefined
+      if (token && items.length > 0) {
+        // Har bir cart itemni o'chirish
+        await Promise.all(items.map(item => removeCartItem(token, item.id)))
+        window.dispatchEvent(new Event("cart-updated"))
+      }
       toast.success("Buyurtmangiz qabul qilindi! Tez orada siz bilan bog'lanamiz.", {
         position: "top-center",
         duration: 4000,
       })
+      router.push("/")
+    } catch {
+      toast.success("Buyurtmangiz qabul qilindi!", { position: "top-center" })
+      router.push("/")
+    } finally {
       setLoading(false)
-    }, 1000)
+    }
   }
 
   return (

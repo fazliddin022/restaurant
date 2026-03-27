@@ -91,3 +91,39 @@ export interface CartResponse {
   subtotal: number
   items: CartItem[]
 }
+
+// ─── Team ─────────────────────────────────────────────────────
+export interface TeamMember {
+  id: number
+  firstName: string
+  lastName: string
+  avatar: string
+  position: string
+  role: string
+}
+
+// ─── Tables ───────────────────────────────────────────────────
+export interface Table {
+  id: number
+  tableNumber: number
+  capacity: number
+  location: string
+  status: "AVAILABLE" | "OCCUPIED" | "RESERVED"
+}
+
+// ─── Reservation ──────────────────────────────────────────────
+export interface ReservationPayload {
+  email: string
+  guestCount: number
+  reservationDate: string
+  reservationTime: string
+  tableId: number
+}
+
+// ─── Contact ──────────────────────────────────────────────────
+export interface ContactPayload {
+  name: string
+  email: string
+  phone: string
+  message: string
+}

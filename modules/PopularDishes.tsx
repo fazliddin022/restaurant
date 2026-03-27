@@ -12,6 +12,22 @@ interface Props {
   products: Product[]
 }
 
+const IMAGE_BASE = process.env.NEXT_PUBLIC_IMAGE_URL || "https://anorkhulov.uz/uploads"
+const FALLBACK_IMAGE = "/images/our-dish.png"
+
+function buildProductImageSrc(image: Product["image"]) {
+  const cleanImage = typeof image === "string" ? image.trim() : ""
+  if (!cleanImage || cleanImage === "null" || cleanImage === "undefined") {
+    return FALLBACK_IMAGE
+  }
+  if (/^https?:\/\//i.test(cleanImage)) {
+    return cleanImage
+  }
+  const base = IMAGE_BASE.replace(/\/$/, "")
+  const path = cleanImage.replace(/^\//, "")
+  return `${base}/${path}`
+}
+
 const PopularDishes = ({ products }: Props) => {
   const t = useTranslations("PopularDishes")
 
@@ -28,7 +44,7 @@ const PopularDishes = ({ products }: Props) => {
                   name={item.name}
                   description={item.description}
                   price={`$${item.price}`}
-                  img={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${item.image}`}
+                  img={buildProductImageSrc(item.image)}
                 />
               </CarouselItem>
             ))}

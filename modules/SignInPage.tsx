@@ -27,11 +27,16 @@ const SignInPage = () => {
       if (res) {
         setCookie("token", res.data.accessToken)
         setCookie("userId", String(res.data.user.id))
+        setCookie("role", res.data.user.role)
         setCookie("userInfo", JSON.stringify({
           username: `${res.data.user.firstName} ${res.data.user.lastName}`
         }))
         toast.success("Successfully logged in", { position: "top-center" })
-        router.push("/")
+        if (res.data.user.role === "ADMIN") {
+          router.push("/admin")
+        } else {
+          router.push("/")
+        }
       }
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : "Xatolik yuz berdi"

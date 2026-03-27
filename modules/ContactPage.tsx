@@ -4,9 +4,33 @@ import Navbar from "./Navbar"
 import { Link } from "@/i18n/navigation"
 import { Button } from "@/components/ui/button"
 import { useTranslations } from "next-intl"
+import { useState } from "react"
+import { sendContact } from "@/services/api"
+import { toast } from "sonner"
 
 const ContactPage = () => {
   const t = useTranslations("ContactPage")
+  const [loading, setLoading] = useState(false)
+  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" })
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    if (!form.name || !form.email || !form.phone || !form.message) {
+      toast.error("Barcha maydonlarni to'ldiring!", { position: "top-center" })
+      return
+    }
+    setLoading(true)
+    try {
+      await sendContact(form)
+      toast.success("Xabaringiz yuborildi!", { position: "top-center" })
+      setForm({ name: "", email: "", phone: "", message: "" })
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Xatolik yuz berdi"
+      toast.error(message, { position: "top-center" })
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const contacts = [
     {
@@ -68,28 +92,36 @@ const ContactPage = () => {
           </div>
 
           <h2 className="text-4xl font-bold text-center mb-10">{t("formTitle")}</h2>
-          <form className="max-w-[600px] mx-auto flex flex-col gap-5">
+          <form onSubmit={handleSubmit} className="max-w-[600px] mx-auto flex flex-col gap-5">
             <input
               placeholder={t("namePlaceholder")}
+              value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
               className="w-full border border-black/20 rounded-[12px] px-5 py-4 text-base bg-white/50 outline-none focus:border-black/50 transition-colors"
             />
             <input
               placeholder={t("emailPlaceholder")}
               type="email"
+              value={form.email}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
               className="w-full border border-black/20 rounded-[12px] px-5 py-4 text-base bg-white/50 outline-none focus:border-black/50 transition-colors"
             />
             <input
               placeholder={t("phonePlaceholder")}
+              value={form.phone}
+              onChange={(e) => setForm({ ...form, phone: e.target.value })}
               className="w-full border border-black/20 rounded-[12px] px-5 py-4 text-base bg-white/50 outline-none focus:border-black/50 transition-colors"
             />
             <textarea
               placeholder={t("messagePlaceholder")}
               rows={4}
+              value={form.message}
+              onChange={(e) => setForm({ ...form, message: e.target.value })}
               className="w-full border border-black/20 rounded-[12px] px-5 py-4 text-base bg-white/50 outline-none focus:border-black/50 transition-colors resize-none"
             />
             <div className="flex justify-end">
-              <Button className="cursor-pointer py-6! px-10! rounded-[13px] text-base font-semibold">
-                {t("sendBtn")}
+              <Button type="submit" disabled={loading} className="cursor-pointer py-6! px-10! rounded-[13px] text-base font-semibold">
+                {loading ? "Yuborilmoqda..." : t("sendBtn")}
               </Button>
             </div>
           </form>

@@ -7,16 +7,15 @@ import { ArrowRightIcon } from "@/public/icons"
 import { useTranslations } from "next-intl"
 import Image from "next/image"
 
-const team = [
-  { id: 1, name: "Александр Петро",  role: "главный повар",   img: "/images/chef-img.jpg" },
-  { id: 2, name: "Александр Петро",  role: "помощник повара", img: "/images/chef-img.jpg" },
-  { id: 3, name: "Александр Петро",  role: "бургер кинг",     img: "/images/chef-img.jpg" },
-  { id: 4, name: "Джулия Вильям",    role: "официантка",      img: "/images/chef-img.jpg" },
-  { id: 5, name: "Джулия Вильям",    role: "официантка",      img: "/images/chef-img.jpg" },
-  { id: 6, name: "Джулия Вильям",    role: "официантка",      img: "/images/chef-img.jpg" },
-]
+import { TeamMember } from "@/@types"
 
-export default function AboutPage() {
+const BASE_IMG = process.env.NEXT_PUBLIC_IMAGE_URL || "https://anorkhulov.uz"
+
+interface Props {
+  team: TeamMember[]
+}
+
+export default function AboutPage({ team }: Props) {
   const t = useTranslations("AboutPage")
 
   return (
@@ -87,14 +86,14 @@ export default function AboutPage() {
             {team.map(member => (
               <div key={member.id} className="flex flex-col items-center gap-3">
                 <Image
-                  src={member.img}
-                  alt={member.name}
+                  src={member.avatar ? `${BASE_IMG}/${member.avatar}` : "/images/chef-img.jpg"}
+                  alt={member.firstName}
                   width={140}
                   height={140}
                   className="w-35 h-35 object-cover rounded-full border-4 border-white/60"
                 />
-                <h3 className="text-lg font-bold">{member.name}</h3>
-                <p className="text-sm text-gray-500">{member.role}</p>
+                <h3 className="text-lg font-bold">{member.firstName} {member.lastName}</h3>
+                <p className="text-sm text-gray-500">{member.position}</p>
               </div>
             ))}
           </div>
